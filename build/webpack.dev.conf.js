@@ -14,6 +14,7 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 })
 
 module.exports = merge(baseWebpackConfig, {
+  mode: process.env.NODE_ENV || 'development',
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
@@ -35,5 +36,5 @@ module.exports = merge(baseWebpackConfig, {
     new FriendlyErrorsPlugin(),
     // generate favicons
     new FaviconsWebpackPlugin(path.resolve(__dirname, '../static/logo.png'))
-  ]
+  ] 
 })
