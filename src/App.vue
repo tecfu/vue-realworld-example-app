@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import '@/../static/scss/style.scss'
 import RwvHeader from '@/components/TheHeader'
 import RwvFooter from '@/components/TheFooter'
 
