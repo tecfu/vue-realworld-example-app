@@ -1,12 +1,17 @@
 var path = require('path')
-var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
 var merge = require('webpack-merge')
+var utils = require('./utils')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var env = process.env.NODE_ENV === 'testing'
+  ? require('../config/test.env')
+  : config.build.env
+
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -14,9 +19,9 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 })
 
 module.exports = merge(baseWebpackConfig, {
-  mode: process.env.NODE_ENV || 'development',
+  mode: process.env.NODE_ENV,
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
+    rules: utils.styleLoaders()
   },
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
@@ -35,6 +40,12 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new FriendlyErrorsPlugin(),
     // generate favicons
-    new FaviconsWebpackPlugin(path.resolve(__dirname, '../static/logo.png'))
+    new FaviconsWebpackPlugin(path.resolve(__dirname, '../static/logo.png')),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: (env === 'production') ? '[name].css' : '[name].[hash].css',
+      chunkFilename: (env === 'production') ? '[id].css' : '[id].[hash].css',
+    })
   ] 
 })

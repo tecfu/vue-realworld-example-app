@@ -25,3 +25,6 @@ Thumbs.db
 dist/
 test/unit/coverage
 test/e2e/reports
+
+Session.vim
+
