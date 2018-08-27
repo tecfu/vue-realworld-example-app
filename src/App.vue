@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { FETCH_CONFIG } from '@/store/actions.type'
 import RwvHeader from '@/components/TheHeader'
 import RwvFooter from '@/components/TheFooter'
 
@@ -15,6 +16,9 @@ export default {
   components: {
     RwvHeader,
     RwvFooter
+  },
+  created: function () {
+    this.$store.dispatch(FETCH_CONFIG)
   }
 }
 </script>
