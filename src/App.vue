@@ -7,21 +7,21 @@
 </template>
 
 <script>
-import '@/../static/scss/style.scss'
-import { FETCH_CONFIG } from '@/store/actions.type'
-import RwvHeader from '@/components/TheHeader'
-import RwvFooter from '@/components/TheFooter'
+import "@/../public/scss/style.scss";
+import { FETCH_CONFIG } from "@/store/actions.type";
+import RwvHeader from "@/components/TheHeader";
+import RwvFooter from "@/components/TheFooter";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     RwvHeader,
     RwvFooter
   },
-  created: function () {
-    this.$store.dispatch(FETCH_CONFIG)
+  created: function() {
+    this.$store.dispatch(FETCH_CONFIG);
   }
-}
+};
 </script>
 
 <style>
